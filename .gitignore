@@ -24,3 +24,8 @@ nbdist/
 .nb-gradle/
 
 .DS_Store
+mvnw
+mvnw.cmd
+.mvn/
+data
+log

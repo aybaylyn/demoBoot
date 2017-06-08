@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+         <!--控制台输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date [%thread] %-5level [%class{0}]:%msg%n</pattern>
+        </layout>
+    </appender>
+         
+         
+    <appender name="demoBoot" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${user.dir}/log/demoBoot.log</File>
+        <!-- 滚动策略,负责滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${user.dir}/log/demoBoot%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+               
+               <!--决定是否以及何时进行滚动-->  
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+                 
+            
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>        
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%thread] %-5level [%class{0}]:%msg%n</pattern>
+            </layout>
+        </encoder>
+             
+    </appender>
+
+    <appender name="test" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${user.dir}/log/demoBoot_test.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${user.dir}/log/demoBoot_test%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>13</maxIndex>
+        </rollingPolicy>
+               
+                 
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+                 
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>    
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date [%thread] %-5level [%class{0}]:%msg%n</pattern>
+            </layout>
+        </encoder>
+
+             
+    </appender>
+         
+    <logger name="com.may.boot.controller" >
+        <appender-ref ref="test"/>
+    </logger>
+         
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+
+    <logger name="com.ibatis" level="debug"/>
+    <logger name="java.sql" level="debug"/>
+
+</configuration>
